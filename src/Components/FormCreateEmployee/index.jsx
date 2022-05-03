@@ -1,58 +1,133 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../services/contextAPI";
 import styled from "styled-components";
 import { departments, states } from "../../API/data";
-import DatePickerNPM from "../DatePicker";
+//import DatePickerNPM from "../DatePicker";
+import DatePicker from "react-date-picker";
+import { INITIAL_STATE } from "../../services/contextAPI";
 
-
-
+import { Controller, useForm } from "react-hook-form";
 
 const FromCreateEmployee = () => {
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const { employeeData, setEmployeeData, employeesArray, setEmployeesArray } =
     useContext(Context);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newEmployeeOBJ = { ...employeeData };
 
-      setEmployeeData({
-        ...employeeData,
-        isModalOpen: true,
-      });
-      setEmployeesArray(employeesArray.concat(newEmployeeOBJ));
-
+  const formatDate = (elt) => {
+    const day =
+      elt.getDate().toString().length < 2 ? "0" + elt.getDate() : elt.getDate();
+    const mounth =
+      elt.getMonth().toString().length < 2
+        ? `0${elt.getMonth() + 1}`
+        : elt.getMonth() + 1;
+    const year = elt.getFullYear();
+    const date = `${day}/${mounth}/${year}`;
+    return date;
   };
 
+  const onSubmit = (data) => {
+    setEmployeeData({
+      firstName: data.firstname,
+      lastName: data.lastname,
+      dateOfBirth: formatDate(data.dateOfBirth),
+      startDate: formatDate(data.startDate),
+      street: data.street,
+      city: data.city,
+      state: data.state,
+      zipCode: data.zipcode,
+      department: data.department,
+      isModalOpen: true,
+    });
+  };
 
+  useEffect(() => {
+    if (employeeData !== INITIAL_STATE) {
+      setEmployeesArray([...employeesArray, employeeData]);
+    }
+  }, [employeeData]);
 
+  console.log(employeesArray);
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="first-name">First Name</label>
       <input
         type="text"
         id="first-name"
-        value={employeeData.firstName}
-        onChange={(e) => {
-          setEmployeeData({ ...employeeData, firstName: e.target.value });
-        }}
-        
+        {...register("firstname", {
+          required: "This is required.",
+          minLength: {
+            value: 4,
+            message: "Min length is 4",
+          },
+          pattern: {
+            value: /^[A-zÀ-ú]+$/i,
+            message: "No number in your name please",
+          },
+        })}
       />
+      <p>{errors.firstname?.message}</p>
 
-      <label htmlFor="last-name">Last Name</label>
+      <label htmlFor="lastname">Last Name</label>
       <input
         type="text"
-        id="last-name"
-        onChange={(e) =>
-          setEmployeeData({ ...employeeData, lastName: e.target.value })
-        }
-        value={employeeData.lastName}
+        id="lastname"
+        {...register("lastname", {
+          required: "This is required.",
+          minLength: {
+            value: 4,
+            message: "Min length is 4",
+          },
+          pattern: {
+            value: /^[A-zÀ-ú]+$/i,
+            message: "No number in your name please",
+          },
+        })}
+      />
+      <p>{errors.lastname?.message}</p>
+
+      <label htmlFor="dateOfBirth">Date of Birth</label>
+
+      <Controller
+        name="dateOfBirth"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <DatePicker
+            onChange={onChange}
+            dayPlaceholder="dd"
+            monthPlaceholder="mm"
+            yearPlaceholder="yyyy"
+            value={value}
+            required={true}
+            format="dd/MM/y"
+            clearIcon=""
+          />
+        )}
       />
 
-      <label htmlFor="date-of-birth">Date of Birth</label>
-      <DatePickerNPM name="dateOfBirth" />
-
       <label htmlFor="start-date">Start Date</label>
-      <DatePickerNPM name="startDate" />
+      <Controller
+        name="startDate"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <DatePicker
+            onChange={onChange}
+            dayPlaceholder="dd"
+            monthPlaceholder="mm"
+            yearPlaceholder="yyyy"
+            value={value}
+            required={true}
+            format="dd/MM/y"
+            clearIcon=""
+          />
+        )}
+      />
 
       <Address>
         <legend>Address</legend>
@@ -61,60 +136,77 @@ const FromCreateEmployee = () => {
         <input
           id="street"
           type="text"
-          onChange={(e) =>
-            setEmployeeData({ ...employeeData, street: e.target.value })
-          }
-          value={employeeData.street}
+          {...register("street", {
+            required: "This is required.",
+            minLength: {
+              value: 4,
+              message: "Min length is 4",
+            },
+          })}
         />
+        <p>{errors.street?.message}</p>
 
         <label htmlFor="city">City</label>
         <input
           id="city"
           type="text"
-          onChange={(e) =>
-            setEmployeeData({ ...employeeData, city: e.target.value })
-          }
-          value={employeeData.city}
+          {...register("city", {
+            required: "This is required.",
+            minLength: {
+              value: 4,
+              message: "Min length is 4",
+            },
+            pattern: {
+              value: /^[A-zÀ-ú]+$/i,
+              message: "No number in your city name",
+            },
+          })}
         />
+        <p>{errors.city?.message}</p>
 
         <label htmlFor="state">State</label>
         <select
-          name="state"
           id="state"
-          onChange={(e) =>
-            setEmployeeData({ ...employeeData, state: e.target.value })
-          }
-          value={employeeData.state}
+          {...register("state", {
+            required: "This is required.",
+          })}
         >
+          <option value="">--Please choose an option--</option>
           {states.map((elt, index) => (
             <option key={index}>{elt.name}</option>
           ))}
         </select>
+        <p>{errors.state?.message}</p>
 
         <label htmlFor="zip-code">Zip Code</label>
         <input
           id="zip-code"
           type="number"
-          onChange={(e) =>
-            setEmployeeData({ ...employeeData, zipCode: e.target.value })
-          }
-          value={employeeData.zipCode}
+          {...register("zipcode", {
+            required: "This is required.",
+            maxLength: {
+              value: 5,
+              message: "Max length is 5",
+            },
+          })}
         />
+        <p>{errors.zipcode?.message}</p>
       </Address>
 
       <label htmlFor="department">Department</label>
       <select
-        name="department"
         id="department"
-        onChange={(e) =>
-          setEmployeeData({ ...employeeData, department: e.target.value })
-        }
-        value={employeeData.department}
+        {...register("department", {
+          required: "This is required.",
+        })}
       >
+        <option value="">--Please choose an option--</option>
         {departments.map((elt, index) => (
           <option key={index}>{elt.name}</option>
         ))}
       </select>
+
+      <p>{errors.department?.message}</p>
 
       <br />
       <input

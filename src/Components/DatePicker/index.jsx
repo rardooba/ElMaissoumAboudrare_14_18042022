@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import DatePicker from "react-date-picker";
 import { Context } from "../../services/contextAPI";
 
-const DatePickerNPM = ({ name }) => {
+const DatePickerNPM = ({ name, register }) => {
   const [startDate, setStartDate] = useState(new Date());
   const { employeeData, setEmployeeData } = useContext(Context);
 
@@ -41,7 +41,7 @@ const DatePickerNPM = ({ name }) => {
     } 
 }
 
-  return <DatePicker onChange={handleInputDate} value={startDate}/>
+  return <DatePicker onChange={handleInputDate} value={startDate} required={true} clearIcon="" />
 };
 
 export default DatePickerNPM;
