@@ -20,17 +20,14 @@ const FromCreateEmployee = () => {
     useContext(Context);
 
 
-  const formatDate = (elt) => {
-    const day =
-      elt.getDate().toString().length < 2 ? "0" + elt.getDate() : elt.getDate();
-    const mounth =
-      elt.getMonth().toString().length < 2
-        ? `0${elt.getMonth() + 1}`
-        : elt.getMonth() + 1;
-    const year = elt.getFullYear();
-    const date = `${day}/${mounth}/${year}`;
-    return date;
-  };
+  const formatDate = (chaine) => {
+    let newDate = new Date(chaine).toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+    return newDate;
+  }
 
   const onSubmit = (data) => {
     setEmployeeData({
@@ -45,6 +42,8 @@ const FromCreateEmployee = () => {
       department: data.department,
       isModalOpen: true,
     });
+
+    console.log(data);
   };
 
   useEffect(() => {
