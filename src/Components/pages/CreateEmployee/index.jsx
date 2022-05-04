@@ -36,6 +36,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  h2 {
+    margin-top: 20px;
+    --typography-spacing-vertical: 0;
+  }
   label {
     display: block;
     margin-top: 1rem;

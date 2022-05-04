@@ -3,3 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
+
+
+/* Light-green Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+  --primary: #7cb342;
+  --primary-hover: #8bc34a;
+  --primary-focus: rgba(124, 179, 66, 0.25);
+  --primary-inverse: #FFF;
+}

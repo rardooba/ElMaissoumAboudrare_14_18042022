@@ -7,10 +7,10 @@ const ListEmployees = () => {
   return (
     <Container id="employee">
       <h1>List Employees</h1>
-      <DataTableList />
       <Link to="/">
-        <button>Go Home</button>
+        <button className="goHome">Go Home</button>
       </Link>
+      <DataTableList />
     </Container>
   );
 };
@@ -18,6 +18,13 @@ const ListEmployees = () => {
 const Container = styled.div`
   width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .goHome {
+    width: 200px;
+  }
 `;
 
 export default ListEmployees;

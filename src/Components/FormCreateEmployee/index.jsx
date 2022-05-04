@@ -2,16 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../../services/contextAPI";
 import styled from "styled-components";
 import { departments, states } from "../../API/data";
-//import DatePickerNPM from "../DatePicker";
-import DatePicker from "react-date-picker";
 import { INITIAL_STATE } from "../../services/contextAPI";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const FromCreateEmployee = () => {
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -19,15 +16,14 @@ const FromCreateEmployee = () => {
   const { employeeData, setEmployeeData, employeesArray, setEmployeesArray } =
     useContext(Context);
 
-
   const formatDate = (chaine) => {
     let newDate = new Date(chaine).toLocaleDateString("fr-FR", {
-      year: "numeric",
-      month: "numeric",
       day: "numeric",
+      month: "numeric",
+      year: "numeric",
     });
     return newDate;
-  }
+  };
 
   const onSubmit = (data) => {
     setEmployeeData({
@@ -70,8 +66,9 @@ const FromCreateEmployee = () => {
             message: "No number in your name please",
           },
         })}
+        aria-invalid={errors.firstname?.message ? "true" : null}
       />
-      <p>{errors.firstname?.message}</p>
+      <small>{errors.firstname?.message}</small>
 
       <label htmlFor="lastname">Last Name</label>
       <input
@@ -88,45 +85,35 @@ const FromCreateEmployee = () => {
             message: "No number in your name please",
           },
         })}
+        
+        aria-invalid={errors.lastname?.message ? "true" : null}
+
       />
-      <p>{errors.lastname?.message}</p>
+      <small>{errors.lastname?.message}</small>
 
       <label htmlFor="dateOfBirth">Date of Birth</label>
-
-      <Controller
+      <input
+        type="date"
         name="dateOfBirth"
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <DatePicker
-            onChange={onChange}
-            dayPlaceholder="dd"
-            monthPlaceholder="mm"
-            yearPlaceholder="yyyy"
-            value={value}
-            required={true}
-            format="dd/MM/y"
-            clearIcon=""
-          />
-        )}
+        id="dateOfBirth"
+        {...register("dateOfBirth", {
+          required: "This is required.",
+        })}
+        aria-invalid={errors.dateOfBirth?.message ? "true" : null}
       />
+      <small>{errors.dateOfBirth?.message}</small>
 
-      <label htmlFor="start-date">Start Date</label>
-      <Controller
+      <label htmlFor="startDate">Start Date</label>
+      <input
+        type="date"
         name="startDate"
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <DatePicker
-            onChange={onChange}
-            dayPlaceholder="dd"
-            monthPlaceholder="mm"
-            yearPlaceholder="yyyy"
-            value={value}
-            required={true}
-            format="dd/MM/y"
-            clearIcon=""
-          />
-        )}
+        id="startDate"
+        {...register("startDate", {
+          required: "This is required.",
+        })}
+        aria-invalid={errors.startDate?.message ? "true" : null}
       />
+      <small>{errors.startDate?.message}</small>
 
       <Address>
         <legend>Address</legend>
@@ -142,8 +129,9 @@ const FromCreateEmployee = () => {
               message: "Min length is 4",
             },
           })}
+          aria-invalid={errors.street?.message ? "true" : null}
         />
-        <p>{errors.street?.message}</p>
+        <small>{errors.street?.message}</small>
 
         <label htmlFor="city">City</label>
         <input
@@ -160,8 +148,9 @@ const FromCreateEmployee = () => {
               message: "No number in your city name",
             },
           })}
+          aria-invalid={errors.city?.message ? "true" : null}
         />
-        <p>{errors.city?.message}</p>
+        <small>{errors.city?.message}</small>
 
         <label htmlFor="state">State</label>
         <select
@@ -169,13 +158,14 @@ const FromCreateEmployee = () => {
           {...register("state", {
             required: "This is required.",
           })}
+          aria-invalid={errors.state?.message ? "true" : null}
         >
           <option value="">--Please choose an option--</option>
           {states.map((elt, index) => (
             <option key={index}>{elt.name}</option>
           ))}
         </select>
-        <p>{errors.state?.message}</p>
+        <small>{errors.state?.message}</small>
 
         <label htmlFor="zip-code">Zip Code</label>
         <input
@@ -188,8 +178,9 @@ const FromCreateEmployee = () => {
               message: "Max length is 5",
             },
           })}
+          aria-invalid={errors.zipcode?.message ? "true" : null}
         />
-        <p>{errors.zipcode?.message}</p>
+        <small>{errors.zipcode?.message}</small>
       </Address>
 
       <label htmlFor="department">Department</label>
@@ -198,6 +189,7 @@ const FromCreateEmployee = () => {
         {...register("department", {
           required: "This is required.",
         })}
+        aria-invalid={errors.department?.message ? "true" : null}
       >
         <option value="">--Please choose an option--</option>
         {departments.map((elt, index) => (
@@ -205,7 +197,7 @@ const FromCreateEmployee = () => {
         ))}
       </select>
 
-      <p>{errors.department?.message}</p>
+      <small>{errors.department?.message}</small>
 
       <br />
       <input
@@ -224,10 +216,21 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   width: 300px;
+
+  small {
+    color: #c62828;
+  }
 `;
 
 const Address = styled.fieldset`
   margin-top: 10px;
+  margin: var(--block-spacing-vertical) 0;
+  padding: var(--block-spacing-vertical) var(--block-spacing-horizontal);
+  border-radius: var(--border-radius);
+  background: var(--card-background-color);
+  legend {
+    font-weight: 700;
+  }
 `;
 
 export default FromCreateEmployee;

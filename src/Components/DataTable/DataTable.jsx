@@ -13,7 +13,7 @@ const DataTableList = () => {
   const value = employeesArray;
   value.map((employee) => delete employee.isModalOpen);
 
-  console.log(value);
+  
 
   //Tables Plugin Config
 
@@ -75,6 +75,29 @@ width: 50vw;
 margin: 0 auto;
 .cAKknD {
   overflow-x: hidden;
+}
+input:not([type=checkbox]):not([type=radio]), select, textarea {
+  width: 35%;
+  border-color: #1ab3e6;
+}
+
+.fWqEaA button {
+  
+  height: auto;
+  
+}
+
+.fWqEaA {
+  background: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.lfJGeo {
+  background-color: unset;
+  padding: 0;
 }
 `
 
