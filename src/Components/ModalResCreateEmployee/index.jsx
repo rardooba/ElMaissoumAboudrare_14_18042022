@@ -20,8 +20,7 @@ const Modal = ({ content, closeModal, modalIsOpen }) => {
 const Container = styled.div`
   z-index: 10;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  top: 65px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -38,6 +37,7 @@ const Container = styled.div`
 
 const ModalContainer = styled.div`
   position: relative;
+  top: 0;
   min-width: 20vw;
   min-height: 15vh;
   background-color: #0a8128;
@@ -57,22 +57,25 @@ const ModalContainer = styled.div`
   color: #fff;
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     right: -12.5px;
     top: -12.5px;
     border: none;
     background-color: #fff;
     color: #000;
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
   }
 
   h3 {

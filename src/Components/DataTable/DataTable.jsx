@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Context } from "../../services/contextAPI";
 import styled from "styled-components"
 
@@ -8,17 +8,40 @@ import { columns, exampleData } from "../../API/data";
 import FilterComponent from "../DataTable/FilterComponent";
 
 const DataTableList = () => {
-  const { employeesArray } = useContext(Context);
+  const { employeesArray, setEmployeesArray } = useContext(Context);
 
-  const value = employeesArray;
-  value.map((employee) => delete employee.isModalOpen);
+  //const value = employeesArray;
+  //value.map((employee) => delete employee.isModalOpen);
 
   
+
+ 
+     
+
+  useEffect(() => {
+    
+    let retrievedObject = window.localStorage.employees ? window.localStorage.employees.split() : [] 
+    //console.log('retrievedObject: ', JSON.parse(retrievedObject));
+      //setEmployeesList(obj) J
+
+      //console.log(JSON.parse(retrievedObject));
+
+      //setEmployeesArray.concat(JSON.parse(retrievedObject))
+
+      setEmployeesArray([JSON.parse(retrievedObject)])
+      console.log('employeesList', employeesArray);
+
+  }, [])
+//! infinite rerender
+  //console.log(employeesList);
 
   //Tables Plugin Config
 
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+
+
+
 
   const filteredItems = employeesArray.filter(
 		item => {
@@ -27,7 +50,7 @@ const DataTableList = () => {
     }
 	);
 
-  console.log(exampleData);
+  
 
   const subHeaderComponentMemo = useMemo(() => {
     const handleClear = () => {

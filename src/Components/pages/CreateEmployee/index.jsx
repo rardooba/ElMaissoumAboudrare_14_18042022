@@ -1,19 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Context, INITIAL_STATE } from "../../../services/contextAPI";
 import FromCreateEmployee from "../../FormCreateEmployee";
-import Modal from "../../ModalResCreateEmployee";
 
 const CreateEmployee = () => {
 
-  const {employeeData, setEmployeeData} = useContext(Context)
-
   return (
     <>
-        <Modal content="Employee created !" closeModal={() => setEmployeeData(INITIAL_STATE)} modalIsOpen={employeeData.isModalOpen}/>
       <Title>
-        <h1>HRNet</h1>
+        <img src="./images/logo-wealth-health.png" alt="Logo Wealth Health" />
       </Title>
       <Container>
         <Link to="/employee-table">
@@ -30,6 +25,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 15px auto;
 `;
 const Container = styled.div`
   display: flex;
