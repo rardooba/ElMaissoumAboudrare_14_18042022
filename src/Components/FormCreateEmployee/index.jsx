@@ -5,7 +5,9 @@ import { departments, states } from "../../API/data";
 
 import { useForm } from "react-hook-form";
 
-import Modal from "../ModalResCreateEmployee";
+//import Modal from "../ModalResCreateEmployee";
+
+import ModalLIB from "../ModalResCreateEmployee/ModalLIB";
 
 const FromCreateEmployee = () => {
   const {
@@ -16,8 +18,14 @@ const FromCreateEmployee = () => {
     formState: { errors },
   } = useForm();
 
-  const { employeeData, setEmployeeData, isModalOpen, setIsModalOpen } =
-    useContext(Context);
+  const {
+    employeeData,
+    setEmployeeData,
+    isModalOpen,
+    setIsModalOpen,
+    employeesArray,
+    setEmployeesArray,
+  } = useContext(Context);
 
   const formatDate = (chaine) => {
     let newDate = new Date(chaine).toLocaleDateString("fr-FR", {
@@ -26,6 +34,12 @@ const FromCreateEmployee = () => {
       day: "numeric",
     });
     return newDate;
+  };
+
+  const addStorage = () => {
+    const employeesStorage = employeesArray;
+
+    localStorage.setItem("employees", JSON.stringify(employeesStorage));
   };
 
   const onSubmit = (data) => {
@@ -37,13 +51,21 @@ const FromCreateEmployee = () => {
       street: data.street,
       city: data.city,
       state: data.state,
-      zipCode: data.zipcode,
+      zipCode: toString(data.zipcode),
       department: data.department,
     });
 
-    console.log(data);
-    setIsModalOpen(true)
+    setIsModalOpen(true);
+    setEmployeesArray([...employeesArray, data]);
+
+    addStorage();
   };
+  //! Q: setEmployeesArray([...employeesArray, employeesData]) > undefined employeesArray
+
+  useEffect(() => {}, []);
+
+  console.log(employeeData);
+  console.log(employeesArray);
 
   React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
@@ -51,34 +73,26 @@ const FromCreateEmployee = () => {
     }
   }, [formState.isSubmitSuccessful, reset]);
 
-  useEffect(() => {
-    // if (employeeData !== INITIAL_STATE) {
-    //   setEmployeesArray([...employeesArray, employeeData]);
-    // }
-    const addStorage = () => {
-      let storedData = window.localStorage.employees
-        ? window.localStorage.employees.split()
-        : [];
 
-      if (!storedData.includes(JSON.stringify(employeeData))) {
-        storedData.push(JSON.stringify(employeeData));
-        window.localStorage.employees = storedData;
-      } else {
-        console.log("Already added");
-      }
-      // window.localStorage.setItem("employees", JSON.stringify(employeeData));
-    };
-    addStorage();
-  }, [employeeData]);
+  //!
+  // useEffect(() => {
 
+  //   const employeesStorage = window.localStorage.getItem('employees') !== undefined ? setEmployeesArray([...employeesArray, JSON.parse(window.localStorage.getItem('employees'))]) : employeesArray
+
+  //   window.localStorage.setItem('employees', JSON.stringify(employeesStorage));
+
+  // }, [])
 
   return (
     <>
-      <Modal
+      {/* <Modal
         content="Employee created !"
         closeModal={() => setIsModalOpen(!isModalOpen)}
         modalIsOpen={isModalOpen}
-      />
+      /> */}
+      <ModalLIB onClose={() => setIsModalOpen(!isModalOpen)} isOpen={isModalOpen}>
+        <div>Employee created !</div>
+      </ModalLIB>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="first-name">First Name</label>
         <input
@@ -194,9 +208,9 @@ const FromCreateEmployee = () => {
           </select>
           <small>{errors.state?.message}</small>
 
-          <label htmlFor="zip-code">Zip Code</label>
+          <label htmlFor="zipcode">Zip Code</label>
           <input
-            id="zip-code"
+            id="zipcode"
             type="number"
             {...register("zipcode", {
               required: "This is required.",
@@ -230,13 +244,14 @@ const FromCreateEmployee = () => {
         <input
           type="submit"
           value="Save"
-          data-toggle="modal"
-          data-target="#exampleModal"
         />
       </Form>
     </>
   );
 };
+
+//data-toggle="modal"
+//data-target="#exampleModal"
 
 const Form = styled.form`
   display: flex;

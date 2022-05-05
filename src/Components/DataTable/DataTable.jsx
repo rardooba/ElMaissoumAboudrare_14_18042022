@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Context } from "../../services/contextAPI";
-import styled from "styled-components"
+import styled from "styled-components";
 
 import DataTable from "react-data-table-component";
 import { columns, exampleData } from "../../API/data";
@@ -10,47 +10,38 @@ import FilterComponent from "../DataTable/FilterComponent";
 const DataTableList = () => {
   const { employeesArray, setEmployeesArray } = useContext(Context);
 
-  //const value = employeesArray;
-  //value.map((employee) => delete employee.isModalOpen);
+  // useEffect(() => {
 
-  
+  //   let retrievedObject = window.localStorage.employees ? window.localStorage.employees.split() : []
 
- 
-     
+  //     //console.log(JSON.parse(retrievedObject));
 
-  useEffect(() => {
-    
-    let retrievedObject = window.localStorage.employees ? window.localStorage.employees.split() : [] 
-    //console.log('retrievedObject: ', JSON.parse(retrievedObject));
-      //setEmployeesList(obj) J
+  //     //setEmployeesArray.concat(JSON.parse(retrievedObject))
 
-      //console.log(JSON.parse(retrievedObject));
+  //     setEmployeesArray([JSON.parse(retrievedObject)])
+  //     console.log('employeesList', employeesArray);
 
-      //setEmployeesArray.concat(JSON.parse(retrievedObject))
-
-      setEmployeesArray([JSON.parse(retrievedObject)])
-      console.log('employeesList', employeesArray);
-
-  }, [])
-//! infinite rerender
+  // }, [])
+  //! infinite rerender
   //console.log(employeesList);
+
+
+
 
   //Tables Plugin Config
 
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
-
-
-
-  const filteredItems = employeesArray.filter(
-		item => {
-      return (
-        (item.firstName && item.firstName.toLowerCase().includes(filterText.toLowerCase())) || (item.lastName && item.lastName.toLowerCase().includes(filterText.toLowerCase())))
-    }
-	);
-
-  
+  //here change Array data
+  const filteredItems = exampleData.filter((item) => {
+    return (
+      (item.firstName &&
+        item.firstName.toLowerCase().includes(filterText.toLowerCase())) ||
+      (item.lastName &&
+        item.lastName.toLowerCase().includes(filterText.toLowerCase()))
+    );
+  });
 
   const subHeaderComponentMemo = useMemo(() => {
     const handleClear = () => {
@@ -76,10 +67,31 @@ const DataTableList = () => {
     selectAllRowsItemText: "All",
   };
 
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: "72px", // override the row height
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: "30px", // override the cell padding for head cells
+        paddingRight: "30px",
+        color: "#fff",
+        backgroundColor: "#1d2b36",
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "30px", // override the cell padding for data cells
+        paddingRight: "30px",
+      },
+    },
+  };
+
   return (
     <Tables>
       <DataTable
-        
         columns={columns}
         data={filteredItems}
         pagination
@@ -88,40 +100,64 @@ const DataTableList = () => {
         subHeader
         subHeaderComponent={subHeaderComponentMemo}
         persistTableHead
+        customStyles={customStyles}
       />
     </Tables>
   );
 };
 
 const Tables = styled.main`
-width: 50vw;
-margin: 0 auto;
-.cAKknD {
-  overflow-x: hidden;
-}
-input:not([type=checkbox]):not([type=radio]), select, textarea {
-  width: 35%;
-  border-color: #1ab3e6;
-}
-
-.fWqEaA button {
-  
-  height: auto;
-  
-}
-
-.fWqEaA {
-  background: unset;
+  width: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0;
-}
+  margin-bottom: 50px;
 
-.lfJGeo {
-  background-color: unset;
-  padding: 0;
-}
-`
+  .cAKknD {
+    overflow-x: unset;
+    overflow-y: unset;
+  }
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    width: 35%;
+    border-color: #1ab3e6;
+    margin-bottom: 0;
+  }
+  .eQzNb {
+    width: 68vw;
+  }
+
+  .pgLGf svg {
+    display: none;
+  }
+
+  .ixJwiC option {
+    color: #000;
+  }
+
+  .fWqEaA button {
+    height: auto;
+    margin: 0;
+  }
+
+  .fWqEaA {
+    background: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 20px 0;
+  }
+
+  .lfJGeo {
+    background-color: unset;
+    padding: 0;
+  }
+  .fMjwoj {
+
+    width: 85px;
+  }
+`;
 
 export default DataTableList;
