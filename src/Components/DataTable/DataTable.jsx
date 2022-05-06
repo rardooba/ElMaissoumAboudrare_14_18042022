@@ -1,32 +1,21 @@
 import React, { useContext, useMemo, useState } from "react";
-import { Context } from "../../services/contextAPI";
 import styled from "styled-components";
 
-import DataTable from "react-data-table-component";
-import { columns, exampleData } from "../../API/data";
+//ContextAPI
+import { Context } from "../../services/contextAPI";
 
+//PLUGIN NPM: DataTable
+import DataTable from "react-data-table-component";
 import FilterComponent from "../DataTable/FilterComponent";
+
+//Mocked Data
+//Add Mocked Data Employees with > exampleData
+import { columns } from "../../API/data";
+
+//------------------------------------------------------------//
 
 const DataTableList = () => {
   const { employeesArray } = useContext(Context);
-
-  // useEffect(() => {
-
-  //   let retrievedObject = window.localStorage.employees ? window.localStorage.employees.split() : []
-
-  //     //console.log(JSON.parse(retrievedObject));
-
-  //     //setEmployeesArray.concat(JSON.parse(retrievedObject))
-
-  //     setEmployeesArray([JSON.parse(retrievedObject)])
-  //     console.log('employeesList', employeesArray);
-
-  // }, [])
-  //! infinite rerender
-  //console.log(employeesList);
-
-
-
 
   //Tables Plugin Config
 
@@ -106,6 +95,10 @@ const DataTableList = () => {
   );
 };
 
+/*-----------------------*\
+            CSS
+\*-----------------------*/
+
 const Tables = styled.main`
   width: auto;
   display: flex;
@@ -125,38 +118,22 @@ const Tables = styled.main`
     border-color: #1ab3e6;
     margin-bottom: 0;
   }
-  .eQzNb {
+  .iwtdhY {
     width: 68vw;
   }
 
-  .pgLGf svg {
+  .ea-dCXr svg {
     display: none;
   }
 
-  .ixJwiC option {
+  .reBEO option {
     color: #000;
   }
+  
 
-  .fWqEaA button {
-    height: auto;
-    margin: 0;
-  }
-
-  .fWqEaA {
-    background: unset;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 0 20px 0;
-  }
-
-  .lfJGeo {
+  .dAFHra {
     background-color: unset;
     padding: 0;
-  }
-  .fMjwoj {
-
-    width: 85px;
   }
 `;
 

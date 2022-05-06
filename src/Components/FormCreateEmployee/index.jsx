@@ -1,15 +1,21 @@
-import React, { useContext, useEffect } from "react";
-import { Context } from "../../services/contextAPI";
+import React, { useContext } from "react";
 import styled from "styled-components";
+
+//ContextAPI
+import { Context } from "../../services/contextAPI";
+
+//Data Config > departments, states
 import { departments, states } from "../../API/data";
 
+//PLUGIN NPM: React Hook Form
 import { useForm } from "react-hook-form";
 
-//import Modal from "../ModalResCreateEmployee";
-
+//Components
 import ModalLIB from "../ModalResCreateEmployee/ModalLIB";
 
-const FromCreateEmployee = () => {
+//------------------------------------------------------------//
+
+const FormCreateEmployee = () => {
   const {
     register,
     handleSubmit,
@@ -19,11 +25,8 @@ const FromCreateEmployee = () => {
   } = useForm();
 
   const {
-    employeeData,
-    setEmployeeData,
     isModalOpen,
     setIsModalOpen,
-    employeesArray,
     setEmployeesArray,
   } = useContext(Context);
 
@@ -35,12 +38,6 @@ const FromCreateEmployee = () => {
     });
     return newDate;
   };
-
-  // const addStorage = () => {
-  //   const employeesStorage = window.localStorage.getItem('employees') !== null ? setEmployeesArray([...employeesArray, JSON.parse(window.localStorage.getItem('employees'))]) : employeesArray
-
-  //   window.localStorage.setItem('employees', JSON.stringify(employeesStorage));
-  // };
 
   const onSubmit = (data) => {
     const employee = {
@@ -55,22 +52,12 @@ const FromCreateEmployee = () => {
       department: data.department,
     };
 
-    console.log(employee);
-
     setIsModalOpen(true);
     setEmployeesArray((prevState) => {
       window.localStorage.setItem('employees',  JSON.stringify([...prevState, employee]))
       return [...prevState, employee]
     });
-
-    // addStorage();
   };
-  //! Q: setEmployeesArray([...employeesArray, employeesData]) > undefined employeesArray
-
-  
-
-  
-  console.log(employeesArray);
 
   React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
@@ -79,20 +66,8 @@ const FromCreateEmployee = () => {
   }, [formState.isSubmitSuccessful, reset]);
 
 
-  //!
-  useEffect(() => {
-
-    
-
-  }, [])
-
   return (
     <>
-      {/* <Modal
-        content="Employee created !"
-        closeModal={() => setIsModalOpen(!isModalOpen)}
-        modalIsOpen={isModalOpen}
-      /> */}
       <ModalLIB onClose={() => setIsModalOpen(!isModalOpen)} isOpen={isModalOpen}>
         <div>Employee created !</div>
       </ModalLIB>
@@ -257,8 +232,9 @@ const FromCreateEmployee = () => {
   );
 };
 
-//data-toggle="modal"
-//data-target="#exampleModal"
+/*-----------------------*\
+            CSS
+\*-----------------------*/
 
 const Form = styled.form`
   display: flex;
@@ -283,4 +259,4 @@ const Address = styled.fieldset`
   }
 `;
 
-export default FromCreateEmployee;
+export default FormCreateEmployee;

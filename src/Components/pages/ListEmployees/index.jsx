@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+//Components
 import DataTableList from "../../DataTable/DataTable";
+
+//------------------------------------------------------------//
 
 const ListEmployees = () => {
   
@@ -15,6 +19,10 @@ const ListEmployees = () => {
     </Container>
   );
 };
+
+/*-----------------------*\
+            CSS
+\*-----------------------*/
 
 const Container = styled.div`
   width: 100%;

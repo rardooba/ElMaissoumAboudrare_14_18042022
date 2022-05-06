@@ -1,6 +1,7 @@
 import React from "react";
-
 import styled from "styled-components";
+
+//------------------------------------------------------------//
 
 const ModalLIB = ({ onClose, children, isOpen }) => {
   return (
@@ -19,6 +20,9 @@ const ModalLIB = ({ onClose, children, isOpen }) => {
   );
 };
 
+/*-----------------------*\
+            CSS
+\*-----------------------*/
 
 const Container = styled.div`
   z-index: 10;

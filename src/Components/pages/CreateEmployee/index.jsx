@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import FromCreateEmployee from "../../FormCreateEmployee";
+
+//Components
+import FormCreateEmployee from "../../FormCreateEmployee";
+
+//------------------------------------------------------------//
 
 const CreateEmployee = () => {
 
@@ -15,11 +19,15 @@ const CreateEmployee = () => {
           <button>View current employee list</button>
         </Link>
         <h2>Create Employee</h2>
-        <FromCreateEmployee />
+        <FormCreateEmployee />
       </Container>
     </>
   );
 };
+
+/*-----------------------*\
+            CSS
+\*-----------------------*/
 
 const Title = styled.div`
   display: flex;
