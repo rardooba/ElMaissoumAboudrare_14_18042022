@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { Context } from "../../services/contextAPI";
 import styled from "styled-components";
 
@@ -8,7 +8,7 @@ import { columns, exampleData } from "../../API/data";
 import FilterComponent from "../DataTable/FilterComponent";
 
 const DataTableList = () => {
-  const { employeesArray, setEmployeesArray } = useContext(Context);
+  const { employeesArray } = useContext(Context);
 
   // useEffect(() => {
 
@@ -34,7 +34,7 @@ const DataTableList = () => {
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
   //here change Array data
-  const filteredItems = exampleData.filter((item) => {
+  const filteredItems = employeesArray.filter((item) => {
     return (
       (item.firstName &&
         item.firstName.toLowerCase().includes(filterText.toLowerCase())) ||

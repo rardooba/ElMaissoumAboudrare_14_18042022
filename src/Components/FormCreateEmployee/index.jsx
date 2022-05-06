@@ -36,14 +36,14 @@ const FromCreateEmployee = () => {
     return newDate;
   };
 
-  const addStorage = () => {
-    const employeesStorage = employeesArray;
+  // const addStorage = () => {
+  //   const employeesStorage = window.localStorage.getItem('employees') !== null ? setEmployeesArray([...employeesArray, JSON.parse(window.localStorage.getItem('employees'))]) : employeesArray
 
-    localStorage.setItem("employees", JSON.stringify(employeesStorage));
-  };
+  //   window.localStorage.setItem('employees', JSON.stringify(employeesStorage));
+  // };
 
   const onSubmit = (data) => {
-    setEmployeeData({
+    const employee = {
       firstName: data.firstname,
       lastName: data.lastname,
       dateOfBirth: formatDate(data.dateOfBirth),
@@ -51,20 +51,25 @@ const FromCreateEmployee = () => {
       street: data.street,
       city: data.city,
       state: data.state,
-      zipCode: toString(data.zipcode),
+      zipCode: data.zipcode,
       department: data.department,
-    });
+    };
+
+    console.log(employee);
 
     setIsModalOpen(true);
-    setEmployeesArray([...employeesArray, data]);
+    setEmployeesArray((prevState) => {
+      window.localStorage.setItem('employees',  JSON.stringify([...prevState, employee]))
+      return [...prevState, employee]
+    });
 
-    addStorage();
+    // addStorage();
   };
   //! Q: setEmployeesArray([...employeesArray, employeesData]) > undefined employeesArray
 
-  useEffect(() => {}, []);
+  
 
-  console.log(employeeData);
+  
   console.log(employeesArray);
 
   React.useEffect(() => {
@@ -75,13 +80,11 @@ const FromCreateEmployee = () => {
 
 
   //!
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const employeesStorage = window.localStorage.getItem('employees') !== undefined ? setEmployeesArray([...employeesArray, JSON.parse(window.localStorage.getItem('employees'))]) : employeesArray
+    
 
-  //   window.localStorage.setItem('employees', JSON.stringify(employeesStorage));
-
-  // }, [])
+  }, [])
 
   return (
     <>
@@ -211,12 +214,16 @@ const FromCreateEmployee = () => {
           <label htmlFor="zipcode">Zip Code</label>
           <input
             id="zipcode"
-            type="number"
+            type="text"
             {...register("zipcode", {
               required: "This is required.",
               maxLength: {
                 value: 5,
                 message: "Max length is 5",
+              },
+              pattern: {
+                value: /[0-9]/i,
+                message: "No letter in Zip code please",
               },
             })}
             aria-invalid={errors.zipcode?.message ? "true" : null}

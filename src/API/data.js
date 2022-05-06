@@ -1,15 +1,3 @@
-const labels = [
-  { text: "Last Name", value: "lastName" },
-  { text: "First Name", value: "firstName" },
-  { text: "Date of Birth", value: "dateOfBirth" },
-  { text: "Start Date", value: "startDate" },
-  { text: "Street", value: "street" },
-  { text: "City", value: "city" },
-  { text: "Zip Code", value: "zipCode" },
-  { text: "State", value: "state" },
-  { text: "Department", value: "department" },
-];
-
 const columns = [
   {
       name: 'Last Name',
@@ -43,7 +31,7 @@ const columns = [
   },
   {
       name: 'Zip code',
-      selector: row => row.zipcode,
+      selector: row => row.zipCode,
       sortable: true,
   },
   {
@@ -469,4 +457,4 @@ const states = [
   },
 ];
 
-export { labels, columns, departments, states, exampleData };
+export { columns, departments, states, exampleData };

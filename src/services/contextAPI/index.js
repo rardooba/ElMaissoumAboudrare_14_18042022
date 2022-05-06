@@ -3,18 +3,7 @@ import { createContext, useState } from "react"
 
 export const Context = createContext()
 
-// export const INITIAL_STATE = {
-//     firstName: '',
-//     lastName: '',
-//     dateOfBirth: '',
-//     startDate: '',
-//     street: '',
-//     city: '',
-//     state: '',
-//     zipCode: '',
-//     department: '',
-    
-// }
+
 
 export const ContextProvider = ({children}) => {
     const [employeeData, setEmployeeData] = useState()
