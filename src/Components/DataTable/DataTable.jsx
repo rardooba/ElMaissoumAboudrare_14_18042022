@@ -107,10 +107,11 @@ const Tables = styled.main`
   align-items: center;
   margin-bottom: 50px;
 
-  .cAKknD {
-    overflow-x: unset;
-    overflow-y: unset;
+  header {
+    background-color: unset;
+    padding: 0;
   }
+
   input:not([type="checkbox"]):not([type="radio"]),
   select,
   textarea {
@@ -118,22 +119,17 @@ const Tables = styled.main`
     border-color: #1ab3e6;
     margin-bottom: 0;
   }
-  .iwtdhY {
+
+  nav {
     width: 68vw;
   }
 
-  .ea-dCXr svg {
-    display: none;
-  }
-
-  .reBEO option {
+  nav > div > select > option {
     color: #000;
   }
-  
 
-  .dAFHra {
-    background-color: unset;
-    padding: 0;
+  nav > div > svg {
+    display: none!important;
   }
 `;
 
