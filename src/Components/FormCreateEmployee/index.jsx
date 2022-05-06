@@ -25,6 +25,8 @@ const FormCreateEmployee = () => {
   } = useForm();
 
   const {
+    employeeData,
+    setEmployeeData,
     isModalOpen,
     setIsModalOpen,
     setEmployeesArray,
@@ -51,13 +53,24 @@ const FormCreateEmployee = () => {
       zipCode: data.zipcode,
       department: data.department,
     };
+    
+    setEmployeeData({
+      firstName: data.firstname,
+      lastName: data.lastname,
+    })
 
     setIsModalOpen(true);
+
     setEmployeesArray((prevState) => {
-      window.localStorage.setItem('employees',  JSON.stringify([...prevState, employee]))
-      return [...prevState, employee]
+      window.localStorage.setItem(
+        "employees",
+        JSON.stringify([...prevState, employee])
+      );
+      return [...prevState, employee];
     });
   };
+
+  console.log(employeeData);
 
   React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
@@ -65,11 +78,13 @@ const FormCreateEmployee = () => {
     }
   }, [formState.isSubmitSuccessful, reset]);
 
-
   return (
     <>
-      <ModalLIB onClose={() => setIsModalOpen(!isModalOpen)} isOpen={isModalOpen}>
-        <div>Employee created !</div>
+      <ModalLIB
+        onClose={() => setIsModalOpen(!isModalOpen)}
+        isOpen={isModalOpen}
+      >
+        <div>{employeeData.lastName} {employeeData.firstName} is added !</div>
       </ModalLIB>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="first-name">First Name</label>
@@ -223,10 +238,7 @@ const FormCreateEmployee = () => {
         <small>{errors.department?.message}</small>
 
         <br />
-        <input
-          type="submit"
-          value="Save"
-        />
+        <input type="submit" value="Save" />
       </Form>
     </>
   );
