@@ -5,12 +5,18 @@ import styled from "styled-components";
 //Components
 import FormCreateEmployee from "../../FormCreateEmployee";
 
+import { motion } from "framer-motion";
+
 //------------------------------------------------------------//
 
 const CreateEmployee = () => {
 
   return (
-    <>
+    <MotionContainer as={motion.div}
+    initial={{width: 0}}
+    animate={{width: "100%"}}
+    exit={{x: window.innerWidth, transition: {duration: 0.1}}}
+    >
       <Title>
         <img src="./images/logo-wealth-health.png" alt="Logo Wealth Health" />
       </Title>
@@ -21,13 +27,18 @@ const CreateEmployee = () => {
         <h2>Create Employee</h2>
         <FormCreateEmployee />
       </Container>
-    </>
+    </MotionContainer>
   );
 };
 
 /*-----------------------*\
             CSS
 \*-----------------------*/
+
+const MotionContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+`
 
 const Title = styled.div`
   display: flex;

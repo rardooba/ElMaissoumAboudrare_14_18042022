@@ -70,8 +70,6 @@ const FormCreateEmployee = () => {
     });
   };
 
-  console.log(employeeData);
-
   React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset();

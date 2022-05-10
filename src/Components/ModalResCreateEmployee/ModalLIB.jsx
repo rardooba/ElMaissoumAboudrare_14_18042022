@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 
 //------------------------------------------------------------//
 
 const ModalLIB = ({ onClose, children, isOpen }) => {
+
+  //test key is 'Escape' memoize f(x) for one define
+  const handleKeyDown = useCallback((e) => {
+   e.key === 'Escape' && onClose()
+  }, [onClose])
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [handleKeyDown])
+
   return (
     <>
       {isOpen && (
         <Container>
           <div className="overlay" onClick={onClose}>
             <ModalContainer onClick={(e) => e.stopPropagation()}>
-              <button onClick={onClose}>&#x2715;</button>
+              <button aria-label="close" onClick={onClose}>&#x2715;</button>
               {children}
             </ModalContainer>
           </div>
@@ -41,8 +55,9 @@ const Container = styled.div`
     left: 0;
     top: 0;
     display: flex;
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const ModalContainer = styled.div`

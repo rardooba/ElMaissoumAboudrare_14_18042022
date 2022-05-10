@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 @media only screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --primary: #7cb342;

@@ -5,12 +5,19 @@ import styled from "styled-components";
 //Components
 import DataTableList from "../../DataTable/DataTable";
 
+import { motion } from "framer-motion";
+
 //------------------------------------------------------------//
 
 const ListEmployees = () => {
   
   return (
-    <Container id="employee">
+    <Container as={motion.div}
+    className="employees__container"
+    initial={{width: 0}}
+    animate={{width: "100vw"}}
+    exit={{x: window.innerWidth, transition: {duration: 0.05}}}
+    >
       <h1>List Employees</h1>
       <Link to="/">
         <button className="goHome">Go Home</button>

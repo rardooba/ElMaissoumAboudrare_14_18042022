@@ -19,17 +19,17 @@ const FilterComponent = ({ onFilter, filterText, onClear }) => {
       />
 
       <button type="button" onClick={onClear}>
-        X
+        &#x2715;
       </button>
     </Filter>
   );
 };
 
 FilterComponent.propTypes = {
-    onFilter: propTypes.func,
-    filterText: propTypes.string,
-    onClear: propTypes.func
-  }
+  onFilter: propTypes.func,
+  filterText: propTypes.string,
+  onClear: propTypes.func,
+};
 
 /*-----------------------*\
             CSS
@@ -40,10 +40,11 @@ const Filter = styled.div`
   padding: 0 0 20px 0;
   width: 100%;
   display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   background: unset;
   min-height: 52px;
+  border-color: #7cb342;
 
   button {
     border-radius: 0px 5px 5px 0px;

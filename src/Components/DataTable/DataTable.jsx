@@ -116,7 +116,7 @@ const Tables = styled.main`
   select,
   textarea {
     width: 35%;
-    border-color: #1ab3e6;
+    border-color: #7cb342;
     margin-bottom: 0;
   }
 
