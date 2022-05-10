@@ -15,7 +15,7 @@ function App() {
     if (localStorage.getItem("employees") !== null) {
       setEmployeesArray(JSON.parse(window.localStorage.getItem("employees")));
     }
-  }, []);
+  }, [setEmployeesArray]);
 
   return (
     <>

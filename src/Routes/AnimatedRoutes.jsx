@@ -7,6 +7,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import CreateEmployee from "../Components/pages/CreateEmployee";
 import ListEmployees from "../Components/pages/ListEmployees";
 import NotFound from "../Components/pages/404";
+
+//framer-motion > dynamic animation between pages
 import { AnimatePresence } from "framer-motion";
 
 

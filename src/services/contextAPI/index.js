@@ -1,5 +1,6 @@
 import { createContext, useState } from "react"
 
+//------------------------------------------------------------//
 
 export const Context = createContext()
 
@@ -8,6 +9,7 @@ const INITIAL_STATE_EMPLOYEE_NAME = {
     lastName: ""
 }
 
+//------------------------------------------------------------//
 
 export const ContextProvider = ({children}) => {
     const [employeeData, setEmployeeData] = useState(INITIAL_STATE_EMPLOYEE_NAME)

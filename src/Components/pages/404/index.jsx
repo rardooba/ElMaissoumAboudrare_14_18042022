@@ -4,7 +4,7 @@ import styled from "styled-components";
 const NotFound = () => {
   return (
     <>
-      <Title>Page not found !</Title>
+      <Title>😨 Page not found !</Title>
     </>
   );
 };
@@ -14,8 +14,10 @@ const NotFound = () => {
 \*-----------------------*/
 
 const Title = styled.h1`
-  width: 100%;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default NotFound;
