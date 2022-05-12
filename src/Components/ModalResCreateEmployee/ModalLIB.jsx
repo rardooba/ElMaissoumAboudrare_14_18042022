@@ -22,9 +22,9 @@ const ModalLIB = ({ onClose, children, isOpen }) => {
     <>
       {isOpen && (
         <Container>
-          <div className="overlay" onClick={onClose}>
+          <div className="overlay" data-testid="overlay" onClick={onClose}>
             <ModalContainer onClick={(e) => e.stopPropagation()}>
-              <button aria-label="close" onClick={onClose}>&#x2715;</button>
+              <button onClick={onClose}>&#x2715;</button>
               {children}
             </ModalContainer>
           </div>
