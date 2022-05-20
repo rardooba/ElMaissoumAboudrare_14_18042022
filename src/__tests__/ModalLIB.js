@@ -1,63 +1,68 @@
-import { render, fireEvent, screen, waitFor, act } from "@testing-library/react";
-//import { screen, getByText } from "@testing-library/jest-dom";
-//add full expect method
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import userEvent from "@testing-library/user-event";
 
 import React from "react";
-import ReactDOM from 'react-dom/client';
-//import { act } from 'react-dom/test-utils';
 
 import ModalLIB from "../Components/ModalResCreateEmployee/ModalLIB";
 import { ContextProvider } from "../services/contextAPI";
-//import App from "../App";
 import FormCreateEmployee from "../Components/FormCreateEmployee";
 
-//TODO >> Traitement de la modal si ouverte
+//------------------------------------------------------------//
+
+/*-----------------------*\
+           Tests
+\*-----------------------*/
 
 describe("Given I want add an employee in employees database", () => {
   describe("When I click on the Submit button to add employee", () => {
-    
-    
-    it("Should modal be rendered", async () => {
-      
 
+    it("Should display error message if all fields are empty", async () => {
+      render(
+        <ContextProvider>
+          <FormCreateEmployee />
+        </ContextProvider>
+      );
 
-      // act(() => {
-      //   render(
-      //     <ContextProvider>
-      //      <ModalLIB onClose={() => null} isOpen="false">
-      //       <p>Modal content</p>
-      //      </ModalLIB>
-      //      <FormCreateEmployee />
-      //    </ContextProvider>
-      //   );
-      // });
+      const form = screen.getByTestId("form");
+      fireEvent.submit(form);
 
-      //const mockCallbackIsOpen = jest.fn();
+      expect(screen.getAllByTestId("errorMsg")).toBeTruthy();
+    })
 
-      // render(
-      //   <ContextProvider>
-      //     <ModalLIB onClose={() => null} isOpen={mockCallbackIsOpen}>
-      //       <p>Modal content</p>
-      //     </ModalLIB>
-      //     <FormCreateEmployee />
-      //   </ContextProvider>
-      // );
+    it("Should render modal", async () => {
+      render(
+        <ContextProvider>
+          <FormCreateEmployee />
+        </ContextProvider>
+      );
 
-      // const submit = screen.getByText("Save");
+      //Mock User type form
+      const firstname = screen.getByTestId("firstname");
+      const lastname = screen.getByTestId("lastname");
+      const dateOfBirth = screen.getByTestId("dateOfBirth");
+      const dateStart = screen.getByTestId("dateStart");
+      const street = screen.getByTestId("street");
+      const city = screen.getByTestId("city");
+      const state = screen.getByTestId("state");
+      const zipCode = screen.getByTestId("zipCode");
+      const department = screen.getByTestId("department");
+      //-----
+      userEvent.type(firstname, "rardooba");
+      userEvent.type(lastname, "rardooba");
+      fireEvent.change(dateOfBirth, { target: { value: "1984-12-18" } });
+      fireEvent.change(dateStart, { target: { value: "2022-05-20" } });
+      userEvent.type(street, "99 rar");
+      userEvent.type(city, "city");
+      userEvent.selectOptions(state, screen.getByText('Virginia'));
+      userEvent.type(zipCode, "44444");
+      userEvent.selectOptions(department, ["Legal"]);
 
-      // fireEvent.click(submit);
+      const form = screen.getByTestId("form");
 
-      // act(async () => {
-      //   submit.dispatchEvent(new MouseEvent('click', {isOpen: true}));
-      //   const modal = screen.getByTestId("overlay")
-      //   expect(modal).toBeTruthy()
-
-      // });
-
-      //screen.debug()
-
-      //await waitFor(() => expect(mockCallbackIsOpen).toBeTruthy())
+      fireEvent.submit(form);
+      const modal = await waitFor(() => screen.findByTestId("overlay"));
+      expect(modal).toBeInTheDocument();
     });
   });
 

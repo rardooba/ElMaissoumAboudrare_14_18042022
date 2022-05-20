@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
 //ContextAPI
@@ -23,6 +23,7 @@ const FormCreateEmployee = () => {
     formState,
     formState: { errors },
   } = useForm();
+
 
   const {
     employeeData,
@@ -53,7 +54,7 @@ const FormCreateEmployee = () => {
       zipCode: data.zipcode,
       department: data.department,
     };
-    
+
     setEmployeeData({
       firstName: data.firstname,
       lastName: data.lastname,
@@ -84,7 +85,7 @@ const FormCreateEmployee = () => {
       >
         <div>{employeeData.lastName} {employeeData.firstName} is added !</div>
       </ModalLIB>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)} data-testid="form">
         <label htmlFor="first-name">First Name</label>
         <input
           type="text"
@@ -100,9 +101,10 @@ const FormCreateEmployee = () => {
               message: "No number in your name please",
             },
           })}
+          data-testid="firstname"
           aria-invalid={errors.firstname?.message ? "true" : null}
         />
-        <small>{errors.firstname?.message}</small>
+        <small data-testid="errorMsg">{errors.firstname?.message}</small>
 
         <label htmlFor="lastname">Last Name</label>
         <input
@@ -119,9 +121,11 @@ const FormCreateEmployee = () => {
               message: "No number in your name please",
             },
           })}
+          name="lastname"
+          data-testid="lastname"
           aria-invalid={errors.lastname?.message ? "true" : null}
         />
-        <small>{errors.lastname?.message}</small>
+        <small data-testid="errorMsg">{errors.lastname?.message}</small>
 
         <label htmlFor="dateOfBirth">Date of Birth</label>
         <input
@@ -131,9 +135,10 @@ const FormCreateEmployee = () => {
           {...register("dateOfBirth", {
             required: "This is required.",
           })}
+          data-testid="dateOfBirth"
           aria-invalid={errors.dateOfBirth?.message ? "true" : null}
         />
-        <small>{errors.dateOfBirth?.message}</small>
+        <small data-testid="errorMsg">{errors.dateOfBirth?.message}</small>
 
         <label htmlFor="startDate">Start Date</label>
         <input
@@ -143,9 +148,10 @@ const FormCreateEmployee = () => {
           {...register("startDate", {
             required: "This is required.",
           })}
+          data-testid="dateStart"
           aria-invalid={errors.startDate?.message ? "true" : null}
         />
-        <small>{errors.startDate?.message}</small>
+        <small data-testid="errorMsg">{errors.startDate?.message}</small>
 
         <Address>
           <legend>Address</legend>
@@ -161,9 +167,10 @@ const FormCreateEmployee = () => {
                 message: "Min length is 4",
               },
             })}
+            data-testid="street"
             aria-invalid={errors.street?.message ? "true" : null}
           />
-          <small>{errors.street?.message}</small>
+          <small data-testid="errorMsg">{errors.street?.message}</small>
 
           <label htmlFor="city">City</label>
           <input
@@ -180,9 +187,10 @@ const FormCreateEmployee = () => {
                 message: "No number in your city name",
               },
             })}
+            data-testid="city"
             aria-invalid={errors.city?.message ? "true" : null}
           />
-          <small>{errors.city?.message}</small>
+          <small data-testid="errorMsg">{errors.city?.message}</small>
 
           <label htmlFor="state">State</label>
           <select
@@ -190,6 +198,8 @@ const FormCreateEmployee = () => {
             {...register("state", {
               required: "This is required.",
             })}
+            name="state"
+            data-testid="state"
             aria-invalid={errors.state?.message ? "true" : null}
           >
             <option value="">--Choose an option--</option>
@@ -197,7 +207,7 @@ const FormCreateEmployee = () => {
               <option key={index}>{elt.name}</option>
             ))}
           </select>
-          <small>{errors.state?.message}</small>
+          <small data-testid="errorMsg">{errors.state?.message}</small>
 
           <label htmlFor="zipcode">Zip Code</label>
           <input
@@ -214,9 +224,10 @@ const FormCreateEmployee = () => {
                 message: "No letter in Zip code please",
               },
             })}
+            data-testid="zipCode"
             aria-invalid={errors.zipcode?.message ? "true" : null}
           />
-          <small>{errors.zipcode?.message}</small>
+          <small data-testid="errorMsg">{errors.zipcode?.message}</small>
         </Address>
 
         <label htmlFor="department">Department</label>
@@ -225,6 +236,7 @@ const FormCreateEmployee = () => {
           {...register("department", {
             required: "This is required.",
           })}
+          data-testid="department"
           aria-invalid={errors.department?.message ? "true" : null}
         >
           <option value="">--Choose an option--</option>
@@ -233,10 +245,10 @@ const FormCreateEmployee = () => {
           ))}
         </select>
 
-        <small>{errors.department?.message}</small>
+        <small data-testid="errorMsg">{errors.department?.message}</small>
 
         <br />
-        <input type="submit" value="Save" />
+        <input type="submit" data-testid="save" value="Save" />
       </Form>
     </>
   );
