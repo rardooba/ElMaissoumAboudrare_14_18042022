@@ -47,7 +47,7 @@ const columns = [
 ];
 
 
-const exampleData = [
+const exempleData = [
   {
     firstName: "John",
     lastName: "Doe",
@@ -457,4 +457,4 @@ const states = [
   },
 ];
 
-export { columns, departments, states, exampleData };
+export { columns, departments, states, exempleData };

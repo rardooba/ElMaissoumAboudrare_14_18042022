@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 //ContextAPI
@@ -220,7 +220,7 @@ const FormCreateEmployee = () => {
                 message: "Max length is 5",
               },
               pattern: {
-                value: /[0-9]/i,
+                value: /^[0-9]+$/i,
                 message: "No letter in Zip code please",
               },
             })}

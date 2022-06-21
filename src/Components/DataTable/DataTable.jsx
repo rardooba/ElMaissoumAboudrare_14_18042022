@@ -7,10 +7,12 @@ import { Context } from "../../services/contextAPI";
 //PLUGIN NPM: DataTable
 import DataTable from "react-data-table-component";
 import FilterComponent from "../DataTable/FilterComponent";
+import { columns } from "../../API/data";
 
 //Mocked Data
-//Add Mocked Data Employees with > exampleData
-import { columns } from "../../API/data";
+//Add Mocked Data Employees with > exampleData 
+// replace employeesArray in filteredItems f(x)
+//* import { exempleData } from "../../API/data";
 
 //------------------------------------------------------------//
 
@@ -129,7 +131,7 @@ const Tables = styled.main`
   }
 
   nav > div > svg {
-    display: none!important;
+    display: none !important;
   }
 `;
 

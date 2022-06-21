@@ -17,9 +17,9 @@ const CreateEmployee = () => {
     animate={{width: "100%"}}
     exit={{x: window.innerWidth, transition: {duration: 0.1}}}
     >
-      <Title>
+      <Logo>
         <img src="./images/logo-wealth-health.png" alt="Logo Wealth Health" />
-      </Title>
+      </Logo>
       <Container>
         <Link to="/employee-table">
           <button>View current employee list</button>
@@ -40,7 +40,7 @@ const MotionContainer = styled(motion.div)`
   flex-direction: column;
 `
 
-const Title = styled.div`
+const Logo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
