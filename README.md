@@ -30,6 +30,7 @@ You will need some dependencies for running this project :
 - [React](https://fr.reactjs.org/) (17.0.2)
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start) (6.2.2)
 - [Styled-components](https://styled-components.com/) (5.3.3)
+- [react-oneforall-modal](https://www.npmjs.com/package/react-oneforall-modal) (1.0.7)
 - [Axios](https://github.com/axios/axios) (0.26.1)
 - [prop-types](https://www.npmjs.com/package/prop-types) (15.8.1)
 - [react-hook-form](https://react-hook-form.com/) (7.30.0)
