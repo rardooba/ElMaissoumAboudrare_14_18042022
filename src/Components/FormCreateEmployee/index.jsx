@@ -10,8 +10,7 @@ import { departments, states } from "../../API/data";
 //PLUGIN NPM: React Hook Form
 import { useForm } from "react-hook-form";
 
-//Components
-//import ModalLIB from "../ModalResCreateEmployee/ModalLIB";
+//Plugin
 import {Modal} from "react-oneforall-modal"
 //------------------------------------------------------------//
 
