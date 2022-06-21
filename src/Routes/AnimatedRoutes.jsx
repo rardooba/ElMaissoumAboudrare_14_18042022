@@ -8,22 +8,17 @@ import CreateEmployee from "../Components/pages/CreateEmployee";
 import ListEmployees from "../Components/pages/ListEmployees";
 import NotFound from "../Components/pages/404";
 
-//framer-motion > dynamic animation between pages
-import { AnimatePresence } from "framer-motion";
-
 
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<CreateEmployee />} />
         <Route path="/employee-table" element={<ListEmployees />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </AnimatePresence>
   );
 };
 
