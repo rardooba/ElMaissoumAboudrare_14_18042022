@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 
 import React from "react";
 
-import ModalLIB from "../Components/ModalResCreateEmployee/ModalLIB";
+import {Modal} from "react-oneforall-modal"
 import { ContextProvider } from "../services/contextAPI";
 import FormCreateEmployee from "../Components/FormCreateEmployee";
 
@@ -69,9 +69,9 @@ describe("Given I want add an employee in employees database", () => {
   describe("When modal is open", () => {
     it("Should have some content inside", function () {
       render(
-        <ModalLIB onClose={() => null} isOpen={true}>
+        <Modal onClose={() => null} isOpen={true}>
           <p>Modal content</p>
-        </ModalLIB>
+        </Modal>
       );
 
       const content = screen.getByText("Modal content");
@@ -88,9 +88,9 @@ describe("Given I want add an employee in employees database", () => {
 
         //Render component + add mocked f(x)
         render(
-          <ModalLIB onClose={mockClose} isOpen={true}>
+          <Modal onClose={mockClose} isOpen={true}>
             <p>Modal content</p>
-          </ModalLIB>
+          </Modal>
         );
 
         //get close BTN behin component
@@ -109,9 +109,9 @@ describe("Given I want add an employee in employees database", () => {
 
         //Render component + add mocked f(x)
         render(
-          <ModalLIB onClose={mockClose} isOpen={true}>
+          <Modal onClose={mockClose} isOpen={true}>
             <p>Modal content</p>
-          </ModalLIB>
+          </Modal>
         );
 
         //get close BTN behin component
@@ -130,9 +130,9 @@ describe("Given I want add an employee in employees database", () => {
 
         //Render component + add mocked f(x)
         render(
-          <ModalLIB onClose={mockClose} isOpen={true}>
+          <Modal onClose={mockClose} isOpen={true}>
             <p>Modal content</p>
-          </ModalLIB>
+          </Modal>
         );
 
         fireEvent.keyDown(document, { key: "Escape" });
@@ -148,9 +148,9 @@ describe("Given I want add an employee in employees database", () => {
 
         //Render component + add mocked f(x)
         render(
-          <ModalLIB onClose={mockClose} isOpen={true}>
+          <Modal onClose={mockClose} isOpen={true}>
             <p>Modal content</p>
-          </ModalLIB>
+          </Modal>
         );
 
         fireEvent.keyDown(document, { key: "Enter" });

@@ -11,8 +11,8 @@ import { departments, states } from "../../API/data";
 import { useForm } from "react-hook-form";
 
 //Components
-import ModalLIB from "../ModalResCreateEmployee/ModalLIB";
-
+//import ModalLIB from "../ModalResCreateEmployee/ModalLIB";
+import {Modal} from "react-oneforall-modal"
 //------------------------------------------------------------//
 
 const FormCreateEmployee = () => {
@@ -79,12 +79,12 @@ const FormCreateEmployee = () => {
 
   return (
     <>
-      <ModalLIB
+      <Modal
         onClose={() => setIsModalOpen(!isModalOpen)}
         isOpen={isModalOpen}
       >
         <div>{employeeData.lastName} {employeeData.firstName} is added !</div>
-      </ModalLIB>
+      </Modal>
       <Form onSubmit={handleSubmit(onSubmit)} data-testid="form">
         <label htmlFor="first-name">First Name</label>
         <input
