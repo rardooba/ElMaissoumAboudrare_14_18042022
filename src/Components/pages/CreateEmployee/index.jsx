@@ -10,7 +10,7 @@ import FormCreateEmployee from "../../FormCreateEmployee";
 const CreateEmployee = () => {
 
   return (
-    <MotionContainer>
+    <ParentContainer>
       <Logo>
         <img src="./images/logo-wealth-health.png" width="289px" height="276" alt="Logo Wealth Health" />
       </Logo>
@@ -21,7 +21,7 @@ const CreateEmployee = () => {
         <h2>Create Employee</h2>
         <FormCreateEmployee />
       </Container>
-    </MotionContainer>
+    </ParentContainer>
   );
 };
 
@@ -29,7 +29,7 @@ const CreateEmployee = () => {
             CSS
 \*-----------------------*/
 
-const MotionContainer = styled.div`
+const ParentContainer = styled.div`
   display: flex;
   flex-direction: column;
 `

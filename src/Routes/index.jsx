@@ -4,7 +4,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 //framer-motion > dynamic animation between pages
-import AnimatedRoutes from "./AnimatedRoutes";
+import ConfigRoutes from "./ConfigRoutes";
 
 
 
@@ -13,7 +13,7 @@ import AnimatedRoutes from "./AnimatedRoutes";
 const IndexRoutes = () => {
   return (
     <BrowserRouter>
-     <AnimatedRoutes />
+     <ConfigRoutes />
     </BrowserRouter>
   );
 };

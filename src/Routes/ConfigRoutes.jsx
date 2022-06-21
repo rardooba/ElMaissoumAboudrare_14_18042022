@@ -10,7 +10,7 @@ import NotFound from "../Components/pages/404";
 
 
 
-const AnimatedRoutes = () => {
+const ConfigRoutes = () => {
   const location = useLocation();
 
   return (
@@ -22,4 +22,4 @@ const AnimatedRoutes = () => {
   );
 };
 
-export default AnimatedRoutes;
+export default ConfigRoutes;
