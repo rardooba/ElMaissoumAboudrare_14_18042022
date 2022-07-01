@@ -31,11 +31,9 @@ You will need some dependencies for running this project :
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start) (6.2.2)
 - [Styled-components](https://styled-components.com/) (5.3.3)
 - [react-oneforall-modal](https://www.npmjs.com/package/react-oneforall-modal) (1.0.7)
-- [Axios](https://github.com/axios/axios) (0.26.1)
 - [prop-types](https://www.npmjs.com/package/prop-types) (15.8.1)
 - [react-hook-form](https://react-hook-form.com/) (7.30.0)
 - [react-data-table-component](https://github.com/jbetancur/react-data-table-component) (7.5.0)
-- [framer-motion](https://www.framer.com/motion/) (6.3.3)
 - [picocss](https://picocss.com/) (1.5.0)
 - [babel](https://babeljs.io/)
 
